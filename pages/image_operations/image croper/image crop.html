@@ -1,236 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Crop Tool</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f9;
-        }
-
-        .crop-tool {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            border-radius: 12px;
-            max-width: 90%;
-        }
-
-        #file-input {
-            padding: 10px;
-            font-size: 16px;
-            border: 2px dashed #007bff;
-            border-radius: 8px;
-            background-color: #f0f8ff;
-            color: #007bff;
-            outline: none;
-            cursor: pointer;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
-        }
-
-        #file-input:hover {
-            border-color: #0056b3;
-            background-color: #e6f4ff;
-        }
-
-        #file-input:focus {
-            border-color: #003d80;
-            background-color: #d9efff;
-        }
-
-        #image-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 600px;
-            max-height: 600px;
-            overflow: hidden;
-            border: 3px dashed #aaa;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            width: 100%;
-            aspect-ratio: 1;
-        }
-
-        #image {
-            display: none;
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .crop-area {
-            position: absolute;
-            border: 3px solid #007bff;
-            background-color: rgba(0, 123, 255, 0.3);
-            cursor: move;
-            border-radius: 5px;
-            display: none;
-            resize: both;
-            overflow: hidden;
-        }
-
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        button {
-            padding: 12px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        button:active {
-            transform: scale(1);
-        }
-
-        #preview {
-            margin-top: 20px;
-            display: none;
-            max-width: 100%;
-            border: 3px solid #aaa;
-            border-radius: 12px;
-        }
-
-        @media (max-width: 768px) {
-            .crop-tool {
-                padding: 15px;
-            }
-
-            .buttons {
-                gap: 10px;
-            }
-
-            button {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Cropper</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Cropper.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/common.css">
 </head>
 <body>
-    <div class="crop-tool">
-        <input type="file" id="file-input" accept="image/*">
-        <div id="image-container">
-            <img id="image" alt="">
-            <div id="crop-area" class="crop-area"></div>
+  <script>
+    window.onload = function() {
+      fetch('files/nav.html') // Fetch the content.html file
+        .then(response => response.text()) // Get the text content of the file
+        .then(data => {
+          document.getElementById('nav').innerHTML = data; // Inject content into the div
+        })
+        .catch(error => console.error('Error loading the HTML file:', error));
+    };
+  </script>
+
+  <div id="nav"></div>
+  
+  <div class="container mt-5">
+    <h2 class="text-center">Image Cropper</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <input type="file" id="uploadImage" class="form-control mb-3">
+        
+        <div class="img-container">
+          <img id="image" src="" alt="Picture" style="display:none;">
         </div>
-        <div class="buttons">
-            <button id="crop-btn" style="display: none;">Crop</button>
-            <button id="download-btn" style="display: none;">Download</button>
-        </div>
-        <img id="preview" alt="Cropped Preview">
+      </div>
+      <div class="col-md-4 preview-container">
+        <div class="img-preview" style="width: 100%; height: 200px; overflow: hidden; border: 1px solid #ddd;"></div>
+        <button id="cropButton" class="btn btn-primary mt-3">Crop & Download</button>
+      </div>
     </div>
+  </div>
 
-    <script>
-        const fileInput = document.getElementById('file-input');
-        const image = document.getElementById('image');
-        const imageContainer = document.getElementById('image-container');
-        const cropArea = document.getElementById('crop-area');
-        const cropBtn = document.getElementById('crop-btn');
-        const downloadBtn = document.getElementById('download-btn');
-        const preview = document.getElementById('preview');
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <!-- Cropper.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var cropper;
+      var image = document.getElementById('image');
+      var uploadImage = document.getElementById('uploadImage');
+      var cropButton = document.getElementById('cropButton');
 
-        let isDragging = false;
-        let startX, startY;
+      uploadImage.addEventListener('change', function(event) {
+        var files = event.target.files;
+        var done = function(url) {
+          uploadImage.style.display = 'none';  // Hide the upload field after image is selected
+          image.src = url;
+          image.style.display = 'block';
+          if (cropper) {
+            cropper.destroy();
+          }
+          cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            preview: '.img-preview'
+          });
+        };
+        var reader;
+        var file;
+        if (files && files.length > 0) {
+          file = files[0];
+          if (URL) {
+            done(URL.createObjectURL(file));
+          } else if (FileReader) {
+            reader = new FileReader();
+            reader.onload = function(e) {
+              done(reader.result);
+            };
+            reader.readAsDataURL(file);
+          }
+        }
+      });
 
-        fileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    image.src = e.target.result;
-                    image.style.display = 'block';
-                    fileInput.style.display = 'none';
-                    cropBtn.style.display = 'inline-block';
-                    cropArea.style.width = '150px';
-                    cropArea.style.height = '150px';
-                    cropArea.style.display = 'block';
-                    cropArea.style.left = '50%';
-                    cropArea.style.top = '50%';
-                    cropArea.style.transform = 'translate(-50%, -50%)';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        cropArea.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX - cropArea.offsetLeft;
-            startY = e.clientY - cropArea.offsetTop;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                const x = e.clientX - startX;
-                const y = e.clientY - startY;
-
-                const maxLeft = imageContainer.clientWidth - cropArea.offsetWidth;
-                const maxTop = imageContainer.clientHeight - cropArea.offsetHeight;
-
-                cropArea.style.left = `${Math.max(0, Math.min(x, maxLeft))}px`;
-                cropArea.style.top = `${Math.max(0, Math.min(y, maxTop))}px`;
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        cropBtn.addEventListener('click', () => {
-            const cropRect = cropArea.getBoundingClientRect();
-            const imageRect = image.getBoundingClientRect();
-
-            const scaleX = image.naturalWidth / imageRect.width;
-            const scaleY = image.naturalHeight / imageRect.height;
-
-            const cropX = (cropRect.left - imageRect.left) * scaleX;
-            const cropY = (cropRect.top - imageRect.top) * scaleY;
-            const cropWidth = cropArea.offsetWidth * scaleX;
-            const cropHeight = cropArea.offsetHeight * scaleY;
-
-            canvas.width = cropWidth;
-            canvas.height = cropHeight;
-
-            ctx.drawImage(image, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-
-            const croppedImage = canvas.toDataURL();
-            preview.src = croppedImage;
-            preview.style.display = 'block';
-            downloadBtn.style.display = 'inline-block';
-        });
-
-        downloadBtn.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.download = 'cropped-image.png';
-            link.href = preview.src;
-            link.click();
-        });
-    </script>
+      cropButton.addEventListener('click', function() {
+        var croppedCanvas;
+        var croppedImage;
+        if (cropper) {
+          croppedCanvas = cropper.getCroppedCanvas();
+          croppedImage = croppedCanvas.toDataURL('image/png');
+          var link = document.createElement('a');
+          link.href = croppedImage;
+          link.download = 'cropped-image.png';
+          link.click();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
