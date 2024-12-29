@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - PDF & Image Converter</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            color: #333;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1976d2;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+
+        .form-group button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #1565c0;
+        }
+
+        .switch {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .switch a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .switch a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Sign Up</h1>
+        <form action="dashboard.html">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="switch">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+</body>
+</html>

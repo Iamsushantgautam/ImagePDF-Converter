@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Split & Convert</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <link rel="stylesheet" href="../../../Css/common.css">
+  <link rel="stylesheet" href="pdfsplit.css">
+  <link rel="stylesheet" href="../../../Css/style.css">
+ 
+    
+  
+</head>
+<body>
+  
+  <!-- nav start -->
+  <div id="nav"></div>
+<script>
+  fetch('../../../pages/files/nav.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('nav').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+
+</script>
+<script src="../../../Js/script.js"></script> 
+
+<div class="space"></div> 
+<div class="space"></div>
+<div class="space"></div> 
+  <!-- nav end -->
+
+
+    
+    
+  <div class="outerbox">
+
+    <h1>PDF Split & Convert</h1><br/>
+
+    <div class="upload-container" id="uploadContainer">
+      <input type="file"  id="fileInput" accept="application/pdf">  
+    </div>
+    
+
+    <div class="preview" id="preview"></div>
+
+    <div class="checkbox-container" id="checkboxContainer" style="display:none;">
+      <label><input type="checkbox" id="mergePagesCheckbox"> Merge Selected Pages Into One PDF</label>
+    </div>
+
+    <div class="footer">
+      <button id="downloadSelected" style="display:none;">Download Selected Pages</button>
+    </div>
+  </div>
+  
+  <script>  
+  const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+    const downloadSelectedButton = document.getElementById('downloadSelected');
+    const mergePagesCheckbox = document.getElementById('mergePagesCheckbox');
+    const uploadContainer = document.getElementById('uploadContainer');
+    const checkboxContainer = document.getElementById('checkboxContainer');
+
+    let pagesArray = [];
+    let pdfDoc = null;
+
+    fileInput.addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const fileData = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument(fileData).promise;
+        pdfDoc = await PDFLib.PDFDocument.load(fileData);
+
+        // Remove the upload option after the file is uploaded
+        uploadContainer.style.display = 'none';
+
+        preview.innerHTML = ''; // Clear previous previews
+        pagesArray = []; // Reset pages array
+
+        // Show the merge option after PDF is uploaded
+        checkboxContainer.style.display = 'block';
+
+        for (let i = 0; i < pdf.numPages; i++) {
+          const pageCanvas = document.createElement('canvas');
+          const pageDiv = document.createElement('div');
+          const checkbox = document.createElement('input');
+          const pageLabel = document.createElement('label');
+          const downloadButton = document.createElement('button');
+
+          pageDiv.className = 'page';
+          pageCanvas.id = `page-${i + 1}`;
+          checkbox.type = 'checkbox';
+          checkbox.value = i;
+          pageLabel.innerText = `Page ${i + 1}`;
+          downloadButton.innerText = `Download Page ${i + 1}`;
+
+          pageDiv.appendChild(pageCanvas);
+          pageDiv.appendChild(checkbox);
+          pageDiv.appendChild(pageLabel);
+          pageDiv.appendChild(downloadButton);
+          preview.appendChild(pageDiv);
+
+          const page = await pdf.getPage(i + 1);
+          const viewport = page.getViewport({ scale: 0.5 });
+          pageCanvas.width = viewport.width;
+          pageCanvas.height = viewport.height;
+
+          const context = pageCanvas.getContext('2d');
+          await page.render({ canvasContext: context, viewport }).promise;
+
+          const pagePdf = await createSinglePagePDF(i);
+          pagesArray.push(pagePdf);
+
+          downloadButton.addEventListener('click', () => {
+            downloadPDF(pagesArray[i], `Page-${i + 1}.pdf`);
+          });
+        }
+
+        downloadSelectedButton.style.display = 'inline-block';
+      }
+    });
+
+    downloadSelectedButton.addEventListener('click', async () => {
+      const selectedPages = [...document.querySelectorAll('.page input:checked')].map(input => parseInt(input.value));
+      if (selectedPages.length) {
+        const mergePages = mergePagesCheckbox.checked;
+        if (mergePages) {
+          const mergedPdf = await PDFLib.PDFDocument.create();
+          for (const index of selectedPages) {
+            const pageDoc = await PDFLib.PDFDocument.load(pagesArray[index]);
+            const [page] = await mergedPdf.copyPages(pageDoc, [0]);
+            mergedPdf.addPage(page);
+          }
+          const mergedPdfBytes = await mergedPdf.save();
+          downloadPDF(mergedPdfBytes, 'Selected-Pages-Merged.pdf');
+        } else {
+          for (const index of selectedPages) {
+            downloadPDF(pagesArray[index], `Page-${index + 1}.pdf`);
+          }
+        }
+      } else {
+        alert('Please select at least one page.');
+      }
+    });
+
+    async function createSinglePagePDF(pageIndex) {
+      const singlePagePdf = await PDFLib.PDFDocument.create();
+      const [copiedPage] = await singlePagePdf.copyPages(pdfDoc, [pageIndex]);
+      singlePagePdf.addPage(copiedPage);
+      return singlePagePdf.save();
+    }
+
+    function downloadPDF(pdfBytes, fileName) {
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+    }
+  </script>  
+  
+  
+  <div class="space"></div>
+  
+
+
+  
+  <div class="space"></div>
+  <div class="space"></div> 
+  
+<footer>
+  <div class="footer-container">
+    <!-- Tools Section -->
+    <div class="footer-section">
+      <h3>Image Tools</h3>
+      <ul>
+        <li><a href="../../../pages/image_operations/image croper/image crop.html">Image Crop</a></li>
+        <li><a href="../../../pages/image_operations/image compress/image compress.html">Image Compress</a></li>
+        <li><a href="../../../pages/image_operations/image resize/image resize.html">Image Resize</a></li>
+        <li><a href="../../../pages/image_operations/image extension converter/image extension converter.html">Image Extension Convert</a></li>
+      </ul>
+    </div>
+    
+      <div class="footer-section">
+      <h3>PDF Tools</h3>
+      <ul>
+        <li><a href="../../../pages/pdf_operations/Merge pdf/Merge pdf.html">PDF Merge</a></li>
+        <li><a href=".../../../pages/pdf_operations/Split pdf/split_pdf.html">PDF Split</a></li>
+        <li><a href="../../../pages/pdf_operations/pdf to image/pdf to image.html">PDF To Image</a></li>
+        <li><a href="../../../pages/pdf_operations/compress pdf/PDf_Compress.html">PDF Compress</a></li>
+        
+      </ul>
+    </div>
+    
+
+    <!-- About Section -->
+    <div class="footer-section">
+      <h3>About</h3>
+      <ul>
+        <li><a href="../../../pages/about.html">About Us</a></li>
+        <li><a href="../../../pages/about.html">Careers</a></li>
+        
+      </ul>
+    </div>
+
+    <!-- Policy Section -->
+    <div class="footer-section">
+      <h3>Policy</h3>
+      <ul>
+        <li><a href="../../../pages/policy.html">Privacy Policy</a></li>
+        <li><a href="../../../pages/policy.html">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="../../../pages/contact.html">Contact Us</a></li>
+        <li><a href="../../../pages/contact.html">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media Section -->
+    <div class="footer-section  social-center">
+      <h3>Follow Us</h3>
+      <div class="social-media">
+        <a href="#" class="social-icon facebook"></a>
+     <a href="#" class="social-icon twitter"></a>
+        <a href="#" class="social-icon instagram"></a>
+        <a href="#" class="social-icon linkedin"></a>
+      </div>
+    </div>
+  </div>
+  <p>&copy; 2024 ImagePDF Converter. All rights reserved.</p>
+</footer>
+    
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="../../../Css/style.css">
+    <link rel="stylesheet" href="../../../Css/common.css">
+    <link rel="stylesheet" href="IRcss.css">
+    <title>Image Resizer</title>
+   
+</head>
+<body>
+  <div id="nav"></div>
+  <script>
+    fetch('../../../pages/files/nav.html') // Adjust the relative path as per your structure
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then((html) => {
+      // Do something with the HTML content
+      console.log(html);
+      document.getElementById('nav').innerHTML = html;
+    })
+    .catch((error) => {
+      console.error('Error fetching the file:', error);
+    });
+  
+  </script>
+  <script src="../../../Js/script.js"></script> 
+  
+  <div class="space"></div> 
+  <div class="space"></div>
+  <div class="space"></div> 
+
+  <!-- nav end -->
+
+      
+    <div class="container">
+      
+        <h1 style="text-align: center;">Image Resizer</h1>
+        <div class="space"></div>
+        
+        <form id="uploadForm">
+            
+            
+            <label for="uploadImage" class="upload-btn">Choose Image:</label>
+            <input type="file" class="upload " id="uploadImage" accept="image/*" required>
+            
+            <div class="space"></div> <br><br>
+
+            <label for="width">Width:</label>
+            <input type="number" id="width" placeholder="New Width" required><br>
+            <label for="height">Height:</label>
+            <input type="number" id="height" placeholder="New Height" required>
+            <br><br>
+            <button type="submit">Resize Image</button>
+        </form>
+
+        <div id="output">
+            <h2>Original and Resized Image</h2>
+            <div class="image-container">
+                <div>
+                    <div class="image-title">Original Image</div>
+                    <img id="originalImage" alt="Original Image">
+                    <p id="originalImageName"></p>
+                    <p class="image-info" id="originalImageSize"></p>
+                </div>
+                <div>
+                    <div class="image-title">Resized Image</div>
+                    <img id="resizedImage" alt="Resized Image">
+                    <p class="image-info" id="resizedImageSize"></p>
+                    
+                </div>
+
+            </div>
+            <div class="download-container">
+                <a id="downloadLink" class="hidden button">Download Resized Image</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="IR.js"> </script>
+
+
+    
+    
+    <div class="space"></div>
+    <div class="space"></div> 
+    
+
+      <div class="space"></div>
+    
+      
+
+    <footer>
+        <div class="footer-container">
+          <!-- Tools Section -->
+          <div class="footer-section">
+            <h3>Image Tools</h3>
+            <ul>
+              <li><a href="../../../pages/image_operations/image croper/image crop.html">Image Crop</a></li>
+              <li><a href="../../../pages/image_operations/image compress/image compress.html">Image Compress</a></li>
+              <li><a href="../../../pages/image_operations/image resize/image resize.html">Image Resize</a></li>
+              <li><a href="../../../pages/image_operations/image extension converter/image extension converter.html">Image Extension Convert</a></li>
+            </ul>
+          </div>
+          
+            <div class="footer-section">
+            <h3>PDF Tools</h3>
+            <ul>
+              <li><a href="../../../pages/pdf_operations/Merge pdf/Merge pdf.html">PDF Merge</a></li>
+              <li><a href=".../../../pages/pdf_operations/Split pdf/split_pdf.html">PDF Split</a></li>
+              <li><a href="../../../pages/pdf_operations/pdf to image/pdf to image.html">PDF To Image</a></li>
+              <li><a href="../../../pages/pdf_operations/compress pdf/PDf_Compress.html">PDF Compress</a></li>
+              
+            </ul>
+          </div>
+          
+      
+          <!-- About Section -->
+          <div class="footer-section">
+            <h3>About</h3>
+            <ul>
+              <li><a href="../../../pages/about.html">About Us</a></li>
+              <li><a href="../../../pages/about.html">Careers</a></li>
+              
+            </ul>
+          </div>
+      
+          <!-- Policy Section -->
+          <div class="footer-section">
+            <h3>Policy</h3>
+            <ul>
+              <li><a href="../../../pages/policy.html">Privacy Policy</a></li>
+              <li><a href="../../../pages/policy.html">Terms of Service</a></li>
+            </ul>
+          </div>
+      
+          <!-- Contact Section -->
+          <div class="footer-section">
+            <h3>Contact</h3>
+            <ul>
+              <li><a href="../../../pages/contact.html">Contact Us</a></li>
+              <li><a href="../../../pages/contact.html">Support</a></li>
+            </ul>
+          </div>
+      
+          <!-- Social Media Section -->
+          <div class="footer-section  social-center">
+            <h3>Follow Us</h3>
+            <div class="social-media">
+              <a href="#" class="social-icon facebook"></a>
+           <a href="#" class="social-icon twitter"></a>
+              <a href="#" class="social-icon instagram"></a>
+              <a href="#" class="social-icon linkedin"></a>
+            </div>
+          </div>
+        </div>
+        <p>&copy; 2024 ImagePDF Converter. All rights reserved.</p>
+      </footer>
+    
+</body>
+</html>

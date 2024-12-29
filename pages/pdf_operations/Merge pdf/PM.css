@@ -1,0 +1,59 @@
+.container {
+    max-width: 600px;
+    padding: 20px;
+    background: rgb(245, 247, 249);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[type="file"] {
+    margin-bottom: 20px;
+}
+#pdfFiles{
+    margin-left: calc(30% - 2px);
+}
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background: linear-gradient(90deg, #66bb6a, #388e3c);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+#output {
+    margin-top: 20px;
+    text-align: center;
+}
+#output a {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(90deg, #4caf50, #2e7d32);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+#output a:hover {
+    background: linear-gradient(90deg, #66bb6a, #388e3c);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+#output a:active {
+    background: linear-gradient(90deg, #388e3c, #2e7d32);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(1px);
+}

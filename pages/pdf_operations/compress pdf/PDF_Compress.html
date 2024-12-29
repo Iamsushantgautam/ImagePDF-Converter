@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Compressor</title>
+    <link rel="stylesheet" href="../../../Css/common.css">
+    <link rel="stylesheet" href="../../../Css/style.css">
+    <link rel="stylesheet" href="PPC.css">
+</head>
+<body>
+
+
+    <!-- nav start -->
+    <div id="nav"></div>
+    <script>
+      fetch('../../../pages/files/nav.html') // Adjust the relative path as per your structure
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((html) => {
+        // Do something with the HTML content
+        console.log(html);
+        document.getElementById('nav').innerHTML = html;
+      })
+      .catch((error) => {
+        console.error('Error fetching the file:', error);
+      });
+    
+    </script>
+    <script src="../../../Js/script.js"></script> 
+    
+    <div class="space"></div> 
+    <div class="space"></div>
+ 
+    <!-- nav end -->
+
+
+
+
+    <div class="outerbox">
+
+        <h1 class="c">PDF Compressor</h1>
+      <div id="sub-box">
+        <form id="uploadForm">
+
+            <label for="pdfInput" class="upload-btn">Upload PDF</label>
+            <input type="file" id="pdfInput" class="upload" accept="application/pdf" required>
+            <div class="space"></div> 
+
+            <button type="submit">Compress</button>
+        </div>
+
+        </form>
+
+
+        <div id="output">
+            <p id="status">Please upload a PDF to start compressing.</p>
+            <p class="file-size" id="originalSize"></p>
+            <p class="file-size" id="compressedSize"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('pdfInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a PDF file first.');
+                return;
+            }
+
+            if (file.type !== 'application/pdf') {
+                alert('Please upload a valid PDF file.');
+                return;
+            }
+
+            const originalSizeMB = (file.size / (1024 * 1024)).toFixed(2); // Size in MB
+            document.getElementById('originalSize').textContent = `Original size: ${originalSizeMB} MB`;
+
+            const formData = new FormData();
+            formData.append('pdf', file);
+
+            // Simulate the compression process
+            document.getElementById('status').textContent = 'Compressing PDF...';
+
+            // Simulating PDF compression process (you would integrate an API here for real compression)
+            setTimeout(function() {
+                const compressedFileSize = file.size * 0.6; // Simulate compression (reduce 40%)
+                const compressedSizeMB = (compressedFileSize / (1024 * 1024)).toFixed(2); // Size in MB
+                document.getElementById('compressedSize').textContent = `Compressed size: ${compressedSizeMB} MB`;
+
+                // Simulate creating a compressed file URL
+                const compressedPdfUrl = URL.createObjectURL(file); // In reality, this would be the compressed file URL
+                const downloadLink = document.createElement('a');
+                downloadLink.href = compressedPdfUrl;
+                downloadLink.download = 'compressed_file.pdf';
+                downloadLink.textContent = 'Download Compressed PDF';
+                downloadLink.classList.add('download-btn');
+                document.getElementById('output').appendChild(downloadLink);
+            }, 2000); // Simulated 2 second delay for compression
+        });
+    </script>
+
+
+
+<!-- footer -->
+<div class="space"></div> 
+<div class="space"></div> 
+ <script>
+fetch('../../../pages/files/footer.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('footer').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+</script>
+<div id="footer"></div>
+<!-- footer end -->
+
+</body>
+</html>

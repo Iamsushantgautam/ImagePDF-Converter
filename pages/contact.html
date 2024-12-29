@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - PDF & Image Converter</title>
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/common.css">
+    <style>
+        /* General Reset */
+      
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 17px;
+            
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            color: #1976d2;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            float: left;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1976d2;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        button {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+  
+  <!-- nav start -->
+  <div id="nav"></div>
+<script>
+  fetch('../../../pages/files/nav.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('nav').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+
+</script>
+<script src="../../../Js/script.js"></script> 
+
+<div class="space"></div> 
+
+  <!-- nav end -->
+
+
+
+<div class="space"></div>
+
+
+
+    <div class="form-container">
+        <h1>Contact Us</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+
+    </div>
+
+  
+<!-- footer -->
+<div class="space"></div> 
+<div class="space"></div> 
+ <script>
+fetch('../../../pages/files/footer.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('footer').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+</script>
+<div id="footer"></div>
+<!-- footer end -->
+</body>
+</html>

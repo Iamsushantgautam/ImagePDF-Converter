@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Updates - Image to PDF & PDF to Image Converter</title>
+    <link rel="stylesheet" href="../../Css/common.css">
+    <link rel="stylesheet" href="../../Css/style.css">
+    <link rel="stylesheet" href="IEC.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f5faff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            color: #003b8e;
+        }
+
+        p {
+            margin: 0.5em 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #cfe8ff;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #0056b3;
+        }
+
+        /* Updates Section */
+        .updates-section {
+            padding: 40px 20px;
+        }
+
+        .updates-section h2 {
+            font-size: 2em;
+            border-bottom: 4px solid #0056b3;
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #003b8e;
+        }
+
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .update-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .update-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #0056b3;
+        }
+
+        .update-card p {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .update-card .date {
+            font-size: 0.9em;
+            color: #888;
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+
+        .update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .updates-section h2 {
+                font-size: 1.6em;
+            }
+
+            .update-card h3 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+   
+
+
+
+    <nav class="navbar">
+        
+        
+        <div class="logo" style="font-size:30px;">IP Converter</div>
+        
+        <div class="icons">
+                    
+   <img src="../../../images/man.png" class="profileicon"  onclick="toggleprofile()">
+           
+       <img src="../../../images/menu.png" class="profileicon" onclick="toggleMenu()">
+       
+        </div>
+    </nav>
+    
+    
+    <div class="menu-window" id="menuWindow">
+     <ul>
+          <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../policy.html">Policy</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+            <li><a href="../../feedback.html">Feedback</a></li>
+             <li><a href="#">Image Tools</a></li>
+            <li><a href="#">PDF Tools</a></li>
+        </ul>
+    </div>
+    
+    <div class="menu-window" id="profileWindow">
+     <ul>
+          <li><a href="../../profile.html">Profile</a></li>
+            <li><a href="../../login.html">login</a></li>
+            <li><a href="../../signup.html">sign up</a></li>
+            
+        </ul>
+    </div>
+    
+    
+    <script src="../../../Js/script.js"></script> 
+    
+    
+    <div class="space"></div>
+
+    
+    <header class="header">
+        <div class="container">
+            <h1>Tool Updates</h1>
+            <p>Stay informed about the latest features and improvements to our tools.</p>
+        </div>
+    </header>
+    <main class="updates-section">
+        <div class="container">
+            <h2>Latest Updates</h2>
+            <div class="updates-grid">
+                <div class="update-card">
+                    <h3>Improved Conversion Speed</h3>
+                    <p>Experience faster conversions with optimized algorithms, saving you time.</p>
+                    <span class="date">December 20, 2024</span>
+                </div>
+                <div class="update-card">
+                    <h3>Batch Processing Support</h3>
+                    <p>Upload multiple files and convert them all at once with ease.</p>
+                    <span class="date">November 15, 2024</span>
+                </div>
+                <div class="update-card">
+                    <h3>New User Interface</h3>
+                    <p>A redesigned, modern interface for effortless navigation.</p>
+                    <span class="date">October 10, 2024</span>
+                </div>
+                <div class="update-card">
+                    <h3>Enhanced Image Quality</h3>
+                    <p>Maintain high-resolution images in PDFs for improved clarity.</p>
+                    <span class="date">September 5, 2024</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div class="space"></div>
+    <div class="space"></div> 
+    
+<footer>
+    <div class="footer-container">
+      <!-- Tools Section -->
+      <div class="footer-section">
+        <h3>Image Tools</h3>
+        <ul>
+          <li><a href="../../../pages/image_operations/image croper/image crop.html">Image Crop</a></li>
+          <li><a href="../../../pages/image_operations/image compress/image compress.html">Image Compress</a></li>
+          <li><a href="../../../pages/image_operations/image resize/image resize.html">Image Resize</a></li>
+          <li><a href="../../../pages/image_operations/image extension converter/image extension converter.html">Image Extension Convert</a></li>
+        </ul>
+      </div>
+      
+        <div class="footer-section">
+        <h3>PDF Tools</h3>
+        <ul>
+          <li><a href="../../../pages/pdf_operations/Merge pdf/Merge pdf.html">PDF Merge</a></li>
+          <li><a href=".../../../pages/pdf_operations/Split pdf/split_pdf.html">PDF Split</a></li>
+          <li><a href="../../../pages/pdf_operations/pdf to image/pdf to image.html">PDF To Image</a></li>
+          <li><a href="../../../pages/pdf_operations/compress pdf/PDf_Compress.html">PDF Compress</a></li>
+          
+        </ul>
+      </div>
+      
+  
+      <!-- About Section -->
+      <div class="footer-section">
+        <h3>About</h3>
+        <ul>
+          <li><a href="../../../pages/about.html">About Us</a></li>
+          <li><a href="../../../pages/about.html">Careers</a></li>
+          
+        </ul>
+      </div>
+  
+      <!-- Policy Section -->
+      <div class="footer-section">
+        <h3>Policy</h3>
+        <ul>
+          <li><a href="../../../pages/policy.html">Privacy Policy</a></li>
+          <li><a href="../../../pages/policy.html">Terms of Service</a></li>
+        </ul>
+      </div>
+  
+      <!-- Contact Section -->
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="../../../pages/contact.html">Contact Us</a></li>
+          <li><a href="../../../pages/contact.html">Support</a></li>
+        </ul>
+      </div>
+  
+      <!-- Social Media Section -->
+      <div class="footer-section  social-center">
+        <h3>Follow Us</h3>
+        <div class="social-media">
+          <a href="#" class="social-icon facebook"></a>
+       <a href="#" class="social-icon twitter"></a>
+          <a href="#" class="social-icon instagram"></a>
+          <a href="#" class="social-icon linkedin"></a>
+        </div>
+      </div>
+    </div>
+    <p>&copy; 2024 ImagePDF Converter. All rights reserved.</p>
+  </footer>
+
+
+</body>
+</html>

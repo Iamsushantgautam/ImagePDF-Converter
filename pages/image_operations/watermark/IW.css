@@ -1,0 +1,27 @@
+
+.container {
+    margin: 60px;
+    border-radius: 30px;
+    text-align: center;
+    background: #ebedef;
+    padding: 10px;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+input[type="file"], input[type="text"] {
+    margin: 20px 0;
+}
+canvas {
+    display: none;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #45a049;
+}

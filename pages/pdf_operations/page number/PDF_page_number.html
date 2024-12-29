@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Page Numbers</title>
+  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="../../../Css/style.css">
+  <link rel="stylesheet" href="PPN.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+
+  <!-- nav start -->
+  <div id="nav"></div>
+<script>
+  fetch('../../../pages/files/nav.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('nav').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+
+</script>
+<script src="../../../Js/script.js"></script> 
+
+<div class="space"></div> 
+<div class="space"></div>
+<div class="space"></div> 
+  <!-- nav end -->
+
+
+<div id="outer">
+
+  <h1 class="c">Add Page Numbers to PDF</h1>
+  <div class="space"></div>
+  <div class="container">
+    <div class="space"></div> 
+    <div id="upload-section">
+      <label for="pdf-upload" class="upload-btn" >Upload PDF</label>
+      <input type="file" id="pdf-upload" class="upload" accept="application/pdf">
+    </div>
+
+    <select id="position">
+      <option value="footer-center">Footer Center</option>
+      <option value="footer-left">Footer Bottom Left</option>
+      <option value="footer-right">Footer Bottom Right</option>
+    </select>
+
+    <button id="add-page-numbers" disabled>Add Page Numbers</button>
+    <iframe id="preview" hidden></iframe>
+    <button id="download-btn" hidden>Download PDF</button>
+ 
+    <div class="space"></div>   
+  </div>
+
+</div>
+
+  <!-- Add pdf-lib library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+  <script>
+    const uploadInput = document.getElementById("pdf-upload");
+const addPageNumbersBtn = document.getElementById("add-page-numbers");
+const downloadBtn = document.getElementById("download-btn");
+const preview = document.getElementById("preview");
+const positionSelect = document.getElementById("position");
+
+let pdfBytes;
+
+uploadInput.addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    pdfBytes = await file.arrayBuffer();
+    addPageNumbersBtn.disabled = false;
+  }
+});
+
+addPageNumbersBtn.addEventListener("click", async () => {
+  if (!pdfBytes) return;
+
+  const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+  const pages = pdfDoc.getPages();
+  const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+  const position = positionSelect.value;
+
+  pages.forEach((page, index) => {
+    const { width, height } = page.getSize();
+    const pageNumber = index + 1;
+    let x, y;
+
+    if (position === "footer-center") {
+      x = width / 2 - 30;
+      y = 20;
+    } else if (position === "footer-left") {
+      x = 20;
+      y = 20;
+    } else if (position === "footer-right") {
+      x = width - 60;
+      y = 20;
+    }
+
+    page.drawText(`Page ${pageNumber}`, {
+      x,
+      y,
+      size: 12,
+      font,
+      color: PDFLib.rgb(0, 0, 1),
+    });
+  });
+
+  const modifiedPdfBytes = await pdfDoc.save();
+  const blob = new Blob([modifiedPdfBytes], { type: "application/pdf" });
+
+  const url = URL.createObjectURL(blob);
+  preview.src = url;
+  preview.hidden = false;
+  downloadBtn.hidden = false;
+  downloadBtn.onclick = () => {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Modified_PDF.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  uploadInput.closest("div").hidden = true;
+  addPageNumbersBtn.disabled = true;
+});
+  </script>
+
+  <div class="space"></div>
+  <div class="space"></div> 
+  
+
+
+  
+<!-- footer -->
+<div class="space"></div> 
+<div class="space"></div> 
+ <script>
+fetch('../../../pages/files/footer.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('footer').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+</script>
+<div id="footer"></div>
+<!-- footer end -->
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+.outerbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+#canvasContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+.canvas-wrapper {
+    position: relative;
+    margin: 10px;
+}
+.canvas {
+    border: 1px solid #ddd;
+    max-width: 200px; /* Set max width for smaller images */
+    max-height: 200px; /* Set max height for smaller images */
+    width: auto;
+    height: auto;
+    transition: transform 0.2s;
+}
+.canvas:hover {
+    transform: scale(1.05); /* Slightly enlarge the image on hover */
+    border-color: #007BFF; /* Change border color on hover */
+}
+.downloadLink {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    color: white;
+    background-color: #007BFF;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.downloadLink:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+#convertButton, #zipButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 10px;
+ justify-content: center;
+ text-align: center;
+    align-items: center;
+}
+#convertButton:hover, #zipButton:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}

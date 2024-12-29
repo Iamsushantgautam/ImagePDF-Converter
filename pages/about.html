@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - PDF & Image Converter</title>
+
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/common.css">
+    <style>
+        /* General Reset */
+        
+
+        
+        
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+         
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1976d2;
+            margin-bottom: 1.5rem;
+        }
+
+       
+
+        .highlight {
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        .features {
+            margin-top: 2rem;
+        }
+
+        .features h2 {
+            font-size: 1.8rem;
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+
+        .features ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        .features ul li {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .features h2 {
+                font-size: 1.5rem;
+            }
+
+            p, .features ul li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+  <!-- nav start -->
+  <div id="nav"></div>
+<script>
+  fetch('../../pages/files/nav.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('nav').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+
+</script>
+<script src="../../Js/script.js"></script> 
+
+<div class="space"></div> 
+
+  <!-- nav end -->
+
+
+
+<div class="space"></div>
+
+
+
+
+
+
+    <div class="container">
+        <h1>About Us</h1>
+        <p>
+            Welcome to <span class="highlight">PDF & Image Converter</span>, your one-stop solution for all your file conversion needs. Our platform is designed to make your life easier by providing fast, reliable, and secure tools for converting PDFs to images and images to PDFs. 
+        </p>
+        <p>
+            Whether you're a professional, a student, or just someone who needs to manage files effectively, our tools are built to cater to your requirements. We understand the importance of maintaining the quality and integrity of your documents, and that's why we prioritize excellence in every feature we offer.
+        </p>
+
+        <div class="features">
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li><strong>Easy to Use:</strong> Intuitive design for a seamless user experience.</li>
+                <li><strong>High Quality:</strong> Ensures top-notch output without compromising quality.</li>
+                <li><strong>Fast Conversion:</strong> Get your files converted in seconds.</li>
+                <li><strong>Secure:</strong> Your files are processed securely, ensuring privacy.</li>
+                <li><strong>Free:</strong> Enjoy essential tools without any cost.</li>
+            </ul>
+        </div>
+        </div>
+        
+       
+       
+<!-- footer -->
+<div class="space"></div> 
+<div class="space"></div> 
+ <script>
+fetch('../../pages/files/footer.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('footer').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+</script>
+<div id="footer"></div>
+<!-- footer end -->
+</body>
+</html>

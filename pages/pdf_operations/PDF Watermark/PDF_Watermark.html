@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Watermark</title>
+    <link rel="stylesheet" href="../../../Css/common.css">
+    <link rel="stylesheet" href="../../../Css/style.css">
+    <link rel="stylesheet" href="PW.css">
+</head>
+<body>
+
+  <!-- nav start -->
+  <div id="nav"></div>
+<script>
+  fetch('../../../pages/files/nav.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('nav').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+
+</script>
+<script src="../../../Js/script.js"></script> 
+
+<div class="space"></div> 
+<div class="space"></div>
+<div class="space"></div> 
+  <!-- nav end -->
+
+
+
+  
+    <div class="outerbox">
+       
+        <h1>Upload PDF and Add Watermark</h1>
+        <div class="space"></div> 
+
+        <div class="form-group">
+          <label for="pdf-file" class="upload-btn">Choose PDF:</label>
+        <input type="file" id="pdf-file" class="upload" accept="application/pdf" />
+        </div>
+
+
+        <div class="form-group">
+            <input type="text" id="watermark-text" placeholder="Enter watermark text" />
+        </div>
+
+
+        <div class="button-container">
+            <button id="watermark-btn" onclick="addWatermark()">Add Watermark</button>
+            <div class="spinner" id="loading-spinner"></div>
+        </div>
+        
+        <a id="download-link" class="download-link" style="display:none;">Download Watermarked PDF</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        async function addWatermark() {
+            const pdfFile = document.getElementById('pdf-file').files[0];
+            const watermarkText = document.getElementById('watermark-text').value;
+
+            if (!pdfFile) {
+                alert('Please upload a PDF file.');
+                return;
+            }
+
+            if (!watermarkText) {
+                alert('Please enter watermark text.');
+                return;
+            }
+
+            // Show loading spinner and disable the button
+            const watermarkBtn = document.getElementById('watermark-btn');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            watermarkBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+
+            // Load the PDF
+            const pdfBytes = await pdfFile.arrayBuffer();
+            const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+
+            // Get all the pages in the PDF
+            const pages = pdfDoc.getPages();
+            const { width, height } = pages[0].getSize();
+
+            // Loop through all the pages and add watermark
+            for (const page of pages) {
+                page.drawText(watermarkText, {
+                    x: width / 3,
+                    y: height / 2,
+                    size: 50,
+                    color: PDFLib.rgb(0.75, 0.75, 0.75),  // Light gray color
+                    opacity: 0.5,
+                    rotate: PDFLib.degrees(45),
+                });
+            }
+
+            // Serialize the PDF and create a download link
+            const newPdfBytes = await pdfDoc.save();
+            const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+            const downloadLink = URL.createObjectURL(blob);
+
+            // Hide loading spinner, enable the button, and show the download link
+            loadingSpinner.style.display = 'none';
+            watermarkBtn.disabled = false;
+
+            const downloadElement = document.getElementById('download-link');
+            downloadElement.href = downloadLink;
+            downloadElement.download = "IPC_watermark.pdf";  // This will specify the download file name
+            downloadElement.style.display = 'block';
+            downloadElement.textContent = 'Click here to download your watermarked PDF';
+        }
+    </script>
+
+
+
+<!-- footer -->
+<div class="space"></div> 
+<div class="space"></div> 
+ <script>
+fetch('../../../pages/files/footer.html') // Adjust the relative path as per your structure
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then((html) => {
+    // Do something with the HTML content
+    console.log(html);
+    document.getElementById('footer').innerHTML = html;
+  })
+  .catch((error) => {
+    console.error('Error fetching the file:', error);
+  });
+</script>
+<div id="footer"></div>
+<!-- footer end -->
+</body>
+</html>

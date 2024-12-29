@@ -1,0 +1,33 @@
+.container {
+    text-align: center;
+    background-color: rgb(209, 237, 250);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 6px #0000001a;
+    
+    margin: 40px;
+  }
+  input {
+    padding: 10px;
+    max-width: 400px;
+    width: 80%;
+    margin-top: 20px;
+    border: 1px solid #4682b4;
+    border-radius: 5px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #4682b4; /* Light blue button */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #5a9bd5; /* Slightly darker blue on hover */
+  }
+  .qr-code {
+    margin-top: 20px;
+  }
