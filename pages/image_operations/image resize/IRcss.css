@@ -51,7 +51,7 @@ button:hover {
     text-align: center;
     padding: 10px;
 }
-img {
+.rimg {
     max-width: 100%;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -75,4 +75,11 @@ img:hover {
     text-align: center;
     margin-top: 20px;
 }
+.download-container a{
+    font-size: 30px;
+    width: auto;
+    padding: 10px;
+  
 
+
+}

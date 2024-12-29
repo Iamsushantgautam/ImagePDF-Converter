@@ -1,11 +1,15 @@
-.outerbox{
+.outerbox {
     border-radius: 20px;
     background-color: hsl(220, 23%, 95%);
-    margin: 50px;
+    margin: 20px;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
-
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -14,6 +18,8 @@
 }
 .grid-item {
     border: 1px solid #ddd;
+    width: auto;
+    max-width: 240px;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
