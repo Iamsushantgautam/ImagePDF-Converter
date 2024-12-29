@@ -15,11 +15,17 @@ body{
   justify-content: center;
 }
 
-.c{
-  justify-content: center;
-  align-items:center ;
+#headbox h1 {
+  color:black;
   text-align: center;
+  font-size: 36px;
 }
+
+#headbox p {
+  color: rgb(20, 1, 1);
+  font-size: 16px;
+}
+
 form {
   margin-bottom: 30px;
   text-align: center;

@@ -1,3 +1,4 @@
+/* General Box Styling */
 .outerbox {
     display: flex;
     flex-direction: column;
@@ -6,36 +7,62 @@
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    width: 100%; /* Make it responsive */
+    max-width: 600px; /* Restrict maximum width */
+    margin: auto; /* Center the outerbox on the page */
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* PDF Download Button */
 #pdfDownload {
-    display: none; /* Hide the download button initially */
-    margin-top: 20px;
-    width: 300px;
-    font-size: 24px;
+    display: none; /* Initially hidden */
+    margin-top: 0; /* Removed margin to remove space */
+    width: 100%;
+    max-width: 320px;
+    font-size: 18px;
+    font-weight: bold;
     border-radius: 30px;
     text-decoration: none;
-    padding: 10px 15px;
-    background-color: #319cf4;
+    padding: 12px 20px;
+    background: linear-gradient(145deg, #007BFF, #0056b3);
     color: white;
-    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto; /* Center the button horizontally without extra space */
 }
+
+#pdfDownload:hover {
+    background-color: #0056b3;
+}
+
+/* Toggle Switch */
 .toggle-switch {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     cursor: pointer;
-    margin: 10px 0;
+    margin: 0; /* Removed margin to remove space */
 }
+
 .toggle-switch input {
     display: none;
 }
+
 .toggle-label {
     width: 60px;
     height: 30px;
     background-color: #ccc;
     border-radius: 15px;
     position: relative;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .toggle-label::after {
     content: '';
     position: absolute;
@@ -45,48 +72,89 @@
     height: 24px;
     background-color: white;
     border-radius: 50%;
-    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
+
 input:checked + .toggle-label {
     background-color: #28a745;
 }
+
 input:checked + .toggle-label::after {
     transform: translateX(30px);
 }
 
-/* Styling for buttons */
+/* Buttons */
 button, .button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #007BFF;
     color: white;
-    font-size: 16px;
-    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
     cursor: pointer;
-    margin: 10px 0;
-    transition: background-color 0.3s ease;
+    margin: 0; /* Removed margin to remove space */
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button:hover, .button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-/* Styling for the file input */
+/* File Input */
 .upload-btn {
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #28a745;
     color: white;
-    font-size: 16px;
-    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
     cursor: pointer;
     display: inline-block;
     text-align: center;
-    margin: 10px 0;
+    margin: 0; /* Removed margin to remove space */
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .upload-btn:hover {
     background-color: #218838;
+    transform: scale(1.05);
 }
 
+/* Hide Default File Input */
 .upload {
-    display: none; /* Hide the default file input */
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .outerbox {
+        padding: 15px;
+    }
+
+    button, .button, .upload-btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    #pdfDownload {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+
+    .toggle-label {
+        width: 50px;
+        height: 25px;
+    }
+
+    .toggle-label::after {
+        width: 20px;
+        height: 20px;
+        transform: translateX(25px);
+    }
 }
