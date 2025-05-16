@@ -50,6 +50,9 @@ Whether you need to **merge**, **split**, **compress**, **convert**, or **protec
 ### 🖼️ PDF to image Converter  
 ![PDF to Image Screenshot](Screenshot/pdf-to-image.png)
 
+### 🖼️ Image to PDF Converter  
+![Image to PDF Screenshot](Screenshot/img-to-pdf.png)
+
 ### 🔐 Image Resize Tool  
 ![Image Resize Screenshot](Screenshot/img_resize.png)
 
